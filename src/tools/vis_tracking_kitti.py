@@ -47,16 +47,16 @@ if __name__ == '__main__':
     preds = {}
     for K in range(1, len(sys.argv)):
       pred_path = sys.argv[K] + '/{}.txt'.format(seq)
-      pred_file = open(pred_path, 'r')
-      preds[K] = defaultdict(list)
-      for line in pred_file:
-        tmp = line[:-1].split(' ')
-        frame_id = int(tmp[0])
-        track_id = int(tmp[1])
-        cat_id = cat_ids[tmp[2]]
-        bbox = [float(tmp[6]), float(tmp[7]), float(tmp[8]), float(tmp[9])]
-        score = float(tmp[17])
-        preds[K][frame_id].append(bbox + [track_id, cat_id, score])
+      with open(pred_path, 'r') as pred_file:
+        preds[K] = defaultdict(list)
+        for line in pred_file:
+          tmp = line[:-1].split(' ')
+          frame_id = int(tmp[0])
+          track_id = int(tmp[1])
+          cat_id = cat_ids[tmp[2]]
+          bbox = [float(tmp[6]), float(tmp[7]), float(tmp[8]), float(tmp[9])]
+          score = float(tmp[17])
+          preds[K][frame_id].append(bbox + [track_id, cat_id, score])
 
     images_path = '{}/{}/'.format(IMG_PATH, seq)
     images = os.listdir(images_path)
