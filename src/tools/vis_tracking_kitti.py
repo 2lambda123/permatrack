@@ -16,6 +16,8 @@ cat_ids = {cat: i for i, cat in enumerate(cats)}
 COLORS = [(255, 0, 255), (122, 122, 255), (255, 0, 0)]
 
 def draw_bbox(img, bboxes, c=(255, 0, 255)):
+  """"""
+  
   for bbox in bboxes:
     color = COLORS[int(bbox[5])]
     cv2.rectangle(img, (int(bbox[0]), int(bbox[1])), 
